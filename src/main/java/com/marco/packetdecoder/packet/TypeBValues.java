@@ -6,4 +6,15 @@ public class TypeBValues extends PacketPayloadType {
     public TypeBValues(long[] values) {
         this.values = values;
     }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toString'");
+    }
+
+    @Override
+    public int getPayloadType() {
+        return TYPE_B;
+    }
 }

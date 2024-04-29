@@ -6,7 +6,6 @@ import com.marco.packetdecoder.algorithms.AlgorithmA;
 import com.marco.packetdecoder.algorithms.AlgorithmB;
 import com.marco.packetdecoder.algorithms.AlgorithmC;
 import com.marco.packetdecoder.packet.Packet;
-import com.marco.packetdecoder.packet.Packet.PayloadInterpreter;
 
 public class Decoder {
     
@@ -54,13 +53,13 @@ public class Decoder {
 
         switch (packet.getKey()) {
             case KEY_A:
-                packet.setPayloadInterpreter(new AlgorithmA());
+                packet.setPayloadValues(AlgorithmA.interpretPayload(packet.getPacketBytes()));
                 break;
             case KEY_B:
-                packet.setPayloadInterpreter(new AlgorithmB());
+                packet.setPayloadValues(null);
                 break;
             case KEY_C:
-                packet.setPayloadInterpreter(new AlgorithmC());
+                packet.setPayloadValues(null);
                 break;
             
             default:

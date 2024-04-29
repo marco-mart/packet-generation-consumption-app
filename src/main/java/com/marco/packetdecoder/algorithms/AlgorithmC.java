@@ -2,7 +2,7 @@ package com.marco.packetdecoder.algorithms;
 
 import com.marco.packetdecoder.packet.Packet;
 
-public class AlgorithmC implements Packet.PayloadInterpreter {
+public class AlgorithmC {
 
     /***
      * 16 bit signed integer
@@ -13,7 +13,7 @@ public class AlgorithmC implements Packet.PayloadInterpreter {
 
     private static final int PAYLOAD_LENGTH = 13;
 
-    public void interpretPayload(Packet packet) {
+    public static void interpretPayload(Packet packet) {
         if (packet.getPayloadLength() != PAYLOAD_LENGTH) {
             System.out.println("Payload length for " + packet + " (TYPE A) is not correct.");
             return;

@@ -2,12 +2,9 @@ package com.marco.packetdecoder.algorithms;
 
 import static org.junit.Assert.assertTrue;
 
-import javax.sound.sampled.AudioFileFormat.Type;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import com.marco.packetdecoder.packet.Packet;
 import com.marco.packetdecoder.packet.PacketPayloadType;
 import com.marco.packetdecoder.packet.TypeAValues;
 
@@ -49,18 +46,15 @@ public class AlgorithmATest {
 
     @Test
     public void testInterpretPayload() {
-        Packet packetObj = new Packet();
-        packetObj.setPacketBytes(packetBytes);
 
         char[] charValues = new char[] {
             97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, '\0'
         };
 
-        a.interpretPayload(packetObj);
+        PacketPayloadType trueVal = new TypeAValues(charValues);
 
-        PacketPayloadType temp = packetObj.getPayloadValues();
-        TypeAValues test = (TypeAValues) temp;
+        PacketPayloadType result = AlgorithmA.interpretPayload(packetBytes);
 
-        assertTrue(test.values.equals(charValues));
+        assertTrue(trueVal.equals(result));
     }
 }
