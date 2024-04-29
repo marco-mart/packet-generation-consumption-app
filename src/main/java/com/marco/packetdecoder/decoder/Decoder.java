@@ -34,7 +34,11 @@ public class Decoder {
             return;
         }
 
-        int packetKey = decodeKey();
+        int packetSequence = decodePacketSequenceNumber(packet);
+
+        // int packetKey = decodeKey(packet);
+
+
         
 
         
@@ -42,7 +46,8 @@ public class Decoder {
     }
 
     /***
-     * SOM is 2 bytes longs
+     * SOM is 2 bytes long
+     * [0, 1]
      * @param packet
      * @return The int value of the first 2 bytes read,
      *         or Integer.MIN_VALUE if packet is < 2 bytes.
@@ -55,8 +60,31 @@ public class Decoder {
 
         int packetStart = 0;
         packetStart |= packet[0] << 8;
-        packetStart <<= packet[1];
+        packetStart |= packet[1];
 
         return packetStart;
+    }
+
+    /***
+     * SEQNUM is 2 bytes long
+     * [2, 3]
+     * @param packet
+     * @return The int value of the first 2 bytes read,
+     *         or Integer.MIN_VALUE if packet is < 4 bytes.
+     */
+    public static int decodePacketSequenceNumber(byte[] packet) {
+        if (packet.length < 4) {
+            return Integer.MIN_VALUE;
+        }
+
+        int seqNum = 0;
+        seqNum |= packet[2] << 8;
+        seqNum |= packet[3];
+
+        return seqNum;
+    }
+
+    public static int decodeKey(byte[] packet) {
+        return 1;
     }
 }
