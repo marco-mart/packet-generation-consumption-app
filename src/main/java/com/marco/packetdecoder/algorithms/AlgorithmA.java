@@ -10,6 +10,6 @@ public class AlgorithmA implements Packet.PayloadInterpreter {
     private static final int PAYLOAD_LENGTH = 16;
 
     public void interpretPayload() {
-        
+
     }
 }

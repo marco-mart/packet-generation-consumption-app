@@ -2,6 +2,12 @@ package com.marco.packetdecoder.decoder;
 
 import java.lang.annotation.Documented;
 
+import com.marco.packetdecoder.algorithms.AlgorithmA;
+import com.marco.packetdecoder.algorithms.AlgorithmB;
+import com.marco.packetdecoder.algorithms.AlgorithmC;
+import com.marco.packetdecoder.packet.Packet;
+import com.marco.packetdecoder.packet.Packet.PayloadInterpreter;
+
 public class Decoder {
     
     /***
@@ -25,23 +31,38 @@ public class Decoder {
     public static final int KEY_C = 0x0201;
 
     // Entry
-    public static void decode(byte[] packet) {
+    public static void decode(byte[] message) {
 
-        int startOfPacket = decodeStart(packet);
+        int startOfPacket = decodeStart(message);
 
         // Check if SOM is valid
         if (startOfPacket != START_OF_PACKET) {
             return;
         }
 
-        int packetSequence = decodePacketSequenceNumber(packet);
+        Packet packet = new Packet();
 
-        // int packetKey = decodeKey(packet);
+        int packetSequence = decodePacketSequenceNumber(message);
+        packet.setPacketCount(packetSequence);
 
+        int messageKey = decodeKey(message);
+        packet.setKey(messageKey);
 
-        
-
-        
+        switch (packet.getKey()) {
+            case KEY_A:
+                packet.setPayloadInterpreter(new AlgorithmA());
+                break;
+            case KEY_B:
+                packet.setPayloadInterpreter(new AlgorithmB());
+                break;
+            case KEY_C:
+                packet.setPayloadInterpreter(new AlgorithmC());
+                break;
+            
+            default:
+                System.out.println("Not a valid payload!");
+                break;
+        }        
         // Return packet;
     }
 
@@ -84,7 +105,23 @@ public class Decoder {
         return seqNum;
     }
 
+    /***
+     * Unique 2-byte integer
+     * [4, 5]
+     * @param packet
+     * @return
+     */
     public static int decodeKey(byte[] packet) {
-        return 1;
+        
+        if (packet.length < 6) {
+            return Integer.MIN_VALUE;
+        }
+                   
+        int key = 0;
+
+        key |= packet[4] << 8;
+        key |= packet[5];
+
+        return key;
     }
 }
