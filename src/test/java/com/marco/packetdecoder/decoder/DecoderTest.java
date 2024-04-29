@@ -16,7 +16,27 @@ public class DecoderTest {
             0b0010_1011, // som
             0b0000_0000,
             0b0000_0000, // sequence number
-            0b0000_0001
+            0b0000_0001,
+            0b0000_0001, // key
+            0b0000_0000,
+            0b0000_0000, // payload length
+            0b0001_0000,
+            (byte) 'a',
+            (byte) 'b',
+            (byte) 'c',
+            (byte) 'd',
+            (byte) 'e',
+            (byte) 'f',
+            (byte) 'g',
+            (byte) 'h',
+            (byte) 'i',
+            (byte) 'j',
+            (byte) 'k',
+            (byte) 'l',
+            (byte) 'm',
+            (byte) 'n',
+            (byte) 'o',
+            (byte) '\0'
         };
     }
 
@@ -41,5 +61,17 @@ public class DecoderTest {
         packet[0] |= 16;
         result = Decoder.decodeStart(packet);
         assertFalse(Decoder.START_OF_PACKET == result);
+    }
+
+    @Test
+    public void testDecodeKey() {
+        int result = Decoder.decodeKey(packet);
+        assertEquals(Decoder.KEY_A, result);
+    }
+
+    @Test
+    public void testDecodeLength() {
+        int result = Decoder.decodeLength(packet);
+        assertEquals(16, result);
     }
 }

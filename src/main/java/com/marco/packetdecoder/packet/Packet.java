@@ -2,6 +2,8 @@ package com.marco.packetdecoder.packet;
 
 public class Packet {
     
+    public static final int PAYLOAD_INDEX_START = 8;
+
     /***
      * To get String representation use:
      * packet.getPayloadInterpreter().interpretPayload()
@@ -11,29 +13,37 @@ public class Packet {
      * PayloadInterpreter
      */
     public static interface PayloadInterpreter {
-        public void interpretPayload();
+        public void interpretPayload(Packet packet);
     }
 
     private int key;
     private int packetCount;
-    private byte[] payload;
+    private int payloadLength;
+    private byte[] packetBytes;
     private PayloadInterpreter interpretPayload;
+    private PacketPayloadType payloadValues;
 
     public Packet() {}
 
     public void setKey(int key) {this.key = key;}
     public void setPacketCount(int count) {this.packetCount = count;}
-    public void setPayload(byte[] payload) {this.payload = payload;}
+    public void setPayloadLength(int length) {this.payloadLength = length;}
+    public void setPacketBytes(byte[] packetBytes) {this.packetBytes = packetBytes;}
     public void setPayloadInterpreter(PayloadInterpreter payloadInterpreter) {
         this.interpretPayload = payloadInterpreter;
+    }
+    public void setPayloadValues(PacketPayloadType values) {
+        this.payloadValues = values;
     }
 
     public int getKey() {return this.key;}
     public int getPacketCount() {return this.packetCount;}
-    public byte[] getPayload() {return this.payload;}
+    public int getPayloadLength() {return this.payloadLength;}
+    public byte[] getPacketBytes() {return this.packetBytes;}
     public PayloadInterpreter getPayloadInterpreter() {
         return this.interpretPayload;
     }
-
-
+    public PacketPayloadType getPayloadValues() {
+        return this.payloadValues;
+    }
 }

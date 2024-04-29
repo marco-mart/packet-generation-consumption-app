@@ -31,22 +31,26 @@ public class Decoder {
     public static final int KEY_C = 0x0201;
 
     // Entry
-    public static void decode(byte[] message) {
+    public static Packet decode(byte[] message) {
 
         int startOfPacket = decodeStart(message);
 
         // Check if SOM is valid
         if (startOfPacket != START_OF_PACKET) {
-            return;
+            return null;
         }
 
         Packet packet = new Packet();
+        packet.setPacketBytes(message);
 
         int packetSequence = decodePacketSequenceNumber(message);
         packet.setPacketCount(packetSequence);
 
         int messageKey = decodeKey(message);
         packet.setKey(messageKey);
+
+        int messagePayloadLength = decodeLength(message);
+        packet.setPayloadLength(messagePayloadLength);
 
         switch (packet.getKey()) {
             case KEY_A:
@@ -63,7 +67,8 @@ public class Decoder {
                 System.out.println("Not a valid payload!");
                 break;
         }        
-        // Return packet;
+
+        return packet;
     }
 
     /***
@@ -123,5 +128,25 @@ public class Decoder {
         key |= packet[5];
 
         return key;
+    }
+
+    /***
+     * 2-byte integer
+     * [6, 7]
+     * @param packet
+     * @return
+     */
+    public static int decodeLength(byte[] packet) {
+        
+        if (packet.length < 8) {
+            return Integer.MIN_VALUE;
+        }
+                   
+        int payloadLength = 0;
+
+        payloadLength |= packet[6] << 8;
+        payloadLength |= packet[7];
+
+        return payloadLength;
     }
 }
