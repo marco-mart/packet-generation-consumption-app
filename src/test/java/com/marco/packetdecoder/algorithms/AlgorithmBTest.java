@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.marco.packetdecoder.packet.PacketPayloadType;
 import com.marco.packetdecoder.packet.TypeAValues;
+import com.marco.packetdecoder.packet.TypeBValues;
 
 public class AlgorithmBTest {
 
@@ -23,28 +24,31 @@ public class AlgorithmBTest {
             0b0000_0000,
             0b0000_0000, // payload length == 32 bytes
             0b0010_0000,
-                        // payload
-            0xF,
-            0xF,
-            0xF,
-            0xF,
-
-
+                          // payload 0xFFFFFFFF x 8
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF,
+            (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF
         };
     }
 
     @Test
-    public void testInterpretPayload() {
+    public void testInterpretPayload() {    
 
-        char[] charValues = new char[] {
-            97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, '\0'
-        };
+        long answer = 0xFFFFFFFFL;
 
-        PacketPayloadType trueVal = new TypeAValues(charValues);
+        PacketPayloadType result = AlgorithmB.interpretPayload(packetBytes);
 
-        PacketPayloadType result = AlgorithmA.interpretPayload(packetBytes);
+        TypeBValues bPayload = (TypeBValues) result;
 
-        assertTrue(trueVal.equals(result));
+        for (long pay : bPayload.values) {
+            assertTrue(answer == pay);
+        }
+        
     }
 
     // @Test
