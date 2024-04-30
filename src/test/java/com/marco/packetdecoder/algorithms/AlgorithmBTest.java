@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.marco.packetdecoder.packet.PacketPayloadType;
 import com.marco.packetdecoder.packet.TypeAValues;
 
-public class AlgorithmATest {
+public class AlgorithmBTest {
 
     byte[] packetBytes;
 
@@ -21,25 +21,15 @@ public class AlgorithmATest {
             0b0000_0001,
             0b0000_0001, // key
             0b0000_0000,
-            0b0000_0000, // payload length
-            0b0001_0000,
+            0b0000_0000, // payload length == 32 bytes
+            0b0010_0000,
                         // payload
-            (byte) 'a',  
-            (byte) 'b',
-            (byte) 'c',
-            (byte) 'd',
-            (byte) 'e',
-            (byte) 'f',
-            (byte) 'g',
-            (byte) 'h',
-            (byte) 'i',
-            (byte) 'j',
-            (byte) 'k',
-            (byte) 'l',
-            (byte) 'm',
-            (byte) 'n',
-            (byte) 'o',
-            (byte) '\0'
+            0xF,
+            0xF,
+            0xF,
+            0xF,
+
+
         };
     }
 
@@ -56,4 +46,9 @@ public class AlgorithmATest {
 
         assertTrue(trueVal.equals(result));
     }
+
+    // @Test
+    // public void testInterpretPayload() {
+
+    // }
 }
