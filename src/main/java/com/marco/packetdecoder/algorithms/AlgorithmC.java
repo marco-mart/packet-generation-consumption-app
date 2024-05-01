@@ -1,6 +1,7 @@
 package com.marco.packetdecoder.algorithms;
 
 import com.marco.packetdecoder.packet.Packet;
+import com.marco.packetdecoder.packet.TypeCValues;
 
 public class AlgorithmC {
 
@@ -13,7 +14,7 @@ public class AlgorithmC {
 
     private static final int PAYLOAD_LENGTH = 13;
 
-    public static void interpretPayload(byte[] packetBytes) {
+    public static TypeCValues interpretPayload(byte[] packetBytes) {
 
         /**
          * REMEMBER THAT WE HAVE TO USE AN 'AND' MASK
@@ -28,7 +29,7 @@ public class AlgorithmC {
          */
         if (packetBytes.length - Packet.PAYLOAD_INDEX_START != PAYLOAD_LENGTH) {
             System.out.println("Payload length for packet TYPE C is not correct.");
-            return;
+            return null;
         }
 
         byte[] message = (byte[]) packetBytes.clone();
@@ -66,7 +67,13 @@ public class AlgorithmC {
         float actualFloatValue = (float) floatValue;  
 
         // We read in another 4 bytes so actual index is now: Packet.PAYLOAD_INDEX_START + 8
-
+        char[] charArr = new char[5];
         // Read in 5 char array
+        i = 0;
+        for (; j <= Packet.PAYLOAD_INDEX_START + 13; j++) {
+            charArr[i++] |= message[j];
+        }
+
+        return new TypeCValues(shortValues, actualFloatValue, charArr);
     }
 }
