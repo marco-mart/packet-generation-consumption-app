@@ -52,7 +52,12 @@ public class AlgorithmC {
             shifter /= 8;
         }
 
+        // We read in 4 bytes values so actual index is now: Packet.PAYLOAD_INDEX_START + 4
+
         // Read in 32 bit float
+
+        // We read in another 4 bytes so actual index is now: Packet.PAYLOAD_INDEX_START + 8
+        
         // Read in 5 char array
     }
 }
