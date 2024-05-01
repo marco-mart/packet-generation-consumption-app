@@ -13,7 +13,7 @@ public class AlgorithmC {
 
     private static final int PAYLOAD_LENGTH = 13;
 
-    public static void interpretPayload(Packet packet) {
+    public static void interpretPayload(byte[] packetBytes) {
 
         /**
          * REMEMBER THAT WE HAVE TO USE AN 'AND' MASK
@@ -26,9 +26,33 @@ public class AlgorithmC {
          * 
          * 
          */
-        if (packet.getPayloadLength() != PAYLOAD_LENGTH) {
-            System.out.println("Payload length for " + packet + " (TYPE A) is not correct.");
+        if (packetBytes.length - Packet.PAYLOAD_INDEX_START != PAYLOAD_LENGTH) {
+            System.out.println("Payload length for packet TYPE C is not correct.");
             return;
         }
+
+        byte[] message = (byte[]) packetBytes.clone();
+        short[] shortValues = new short[2];
+
+        // Read in 2 byte signed int
+        // Read in 2 byte signed int
+
+        int i = 0;  // i scrolls through shortValues
+        short value = 0;
+        int shifter = 8;
+        for (int j = 0; j <= 4; j++) {  // j scrolls through packet bytes
+            if (j % 2 == 0 && j > 0) {
+                shortValues[i] = value;  // assuming value stays as a short
+                shifter = 8;
+                i++;
+                if (i > 1) break;
+            }
+            
+            value |= (message[Packet.PAYLOAD_INDEX_START + j] << shifter);
+            shifter /= 8;
+        }
+
+        // Read in 32 bit float
+        // Read in 5 char array
     }
 }

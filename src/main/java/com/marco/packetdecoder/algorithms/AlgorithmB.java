@@ -50,7 +50,7 @@ public class AlgorithmB {
             return null;
         }
 
-        byte[] message = packetBytes;
+        byte[] message = (byte[]) packetBytes.clone();
         long[] payload = new long[8];
         
         // Gotta shift it over 3 times to get it to the 4th byte of the long

@@ -2,20 +2,18 @@ package com.marco.packetdecoder.packet;
 
 public class TypeCValues extends PacketPayloadType {
 
-    public int x;  // 16 bit signed int
-    public int y;
+    public short[] shortValues;
     public float floatValue; // 32 bits
     public char[] charValues; // 5 char array
 
 
     public TypeCValues(
-        int x, int y,
+        short[] shortValues,
         float floatValue,
         char[] charValues
         ) {
 
-        this.x = x;
-        this.y = y;
+        this.shortValues = shortValues;
         this.floatValue = floatValue;
         this.charValues = charValues;
     }
