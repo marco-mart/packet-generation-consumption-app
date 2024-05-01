@@ -59,7 +59,7 @@ public class AlgorithmC {
         long floatValue = 0L;
         shifter = 24;
         // Read in 32 bit float
-        for (; j <= Packet.PAYLOAD_INDEX_START + 8; j++) {
+        for (; j < Packet.PAYLOAD_INDEX_START + 8; j++) {
             floatValue |= message[j] << shifter;
         }
 
@@ -70,7 +70,7 @@ public class AlgorithmC {
         char[] charArr = new char[5];
         // Read in 5 char array
         i = 0;
-        for (; j <= Packet.PAYLOAD_INDEX_START + 13; j++) {
+        for (; j < Packet.PAYLOAD_INDEX_START + 13; j++) {
             charArr[i++] |= message[j];
         }
 
