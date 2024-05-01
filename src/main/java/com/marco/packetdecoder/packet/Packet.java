@@ -2,6 +2,8 @@ package com.marco.packetdecoder.packet;
 
 public class Packet {
     
+    // LENGTH OF PACKET METADATA (BYTES) BEFORE THE
+    // START OF THE ACTUAL PAYLOAD
     public static final int PAYLOAD_INDEX_START = 8;
 
     private int key;

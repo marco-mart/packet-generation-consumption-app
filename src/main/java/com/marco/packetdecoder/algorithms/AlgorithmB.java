@@ -45,7 +45,7 @@ public class AlgorithmB {
          *         System.out.println("2^32=" + Math.pow(2, 32));
          *         System.out.println("max_unsigned_int=" + max_unsigned_int);
          */
-        if (packetBytes.length - 8 !=  PAYLOAD_LENGTH) {  // subtract 8 bytes the bytes in before the payload
+        if (packetBytes.length - Packet.PAYLOAD_INDEX_START !=  PAYLOAD_LENGTH) {  // subtract 8 bytes the bytes in before the payload
             System.out.println("Payload length for Packet TYPE B is not correct.");
             return null;
         }

@@ -10,7 +10,7 @@ public class AlgorithmA {
     private static final int PAYLOAD_LENGTH = 16;
 
     public static TypeAValues interpretPayload(byte[] packetBytes) {
-        if (packetBytes.length - 8 != PAYLOAD_LENGTH) {
+        if (packetBytes.length - Packet.PAYLOAD_INDEX_START != PAYLOAD_LENGTH) {
             System.out.println("Payload length for Packet (TYPE A) is not correct.");
             return null;
         }
