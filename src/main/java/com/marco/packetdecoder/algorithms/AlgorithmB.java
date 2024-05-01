@@ -45,7 +45,7 @@ public class AlgorithmB {
          *         System.out.println("2^32=" + Math.pow(2, 32));
          *         System.out.println("max_unsigned_int=" + max_unsigned_int);
          */
-        if (packetBytes.length - 8 !=  PAYLOAD_LENGTH) {
+        if (packetBytes.length - 8 !=  PAYLOAD_LENGTH) {  // subtract 8 bytes the bytes in before the payload
             System.out.println("Payload length for Packet TYPE B is not correct.");
             return null;
         }
@@ -61,19 +61,20 @@ public class AlgorithmB {
         int i = 0;
         int shift = 24;
         // PAYLOAD STARTS AT THE 8TH INDEX
-        for (int j = 0; j < PAYLOAD_LENGTH; j++) {
+        for (int j = 0; j <= PAYLOAD_LENGTH; j++) {
  
             if (j % 4 == 0 && j > 0) {
                 payload[i] |= data & 0xFFFFFFFFL;
                 data = 0;  // reset data variable
                 i++;  // start setting next number in payload 
                 shift = 24;  // restart shifter
+
+                if (i > 7) break;
             }
-            data |= (message[j] << shift) & 0xFFFFFFFFL;
+            data |= (message[Packet.PAYLOAD_INDEX_START + j] << shift) & 0xFFFFFFFFL;
             shift /= 8;
         }
         
-        // -1s
         TypeBValues values = new TypeBValues(payload);
         return values;
     }

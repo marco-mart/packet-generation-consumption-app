@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.marco.packetdecoder.packet.PacketPayloadType;
-import com.marco.packetdecoder.packet.TypeAValues;
 import com.marco.packetdecoder.packet.TypeBValues;
 
 public class AlgorithmBTest {
@@ -50,9 +49,4 @@ public class AlgorithmBTest {
         }
         
     }
-
-    // @Test
-    // public void testInterpretPayload() {
-
-    // }
 }
