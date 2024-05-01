@@ -38,10 +38,10 @@ public class AlgorithmC {
         // Read in 2 byte signed int
 
         int i = 0;  // i scrolls through shortValues
-        int j = 0;  // j scrolls through packet bytes
+        int j = Packet.PAYLOAD_INDEX_START;  // j scrolls through packet bytes
         short value = 0;
         int shifter = 8;
-        for (j = 0; j <= 4; j++) {
+        for (; j <= Packet.PAYLOAD_INDEX_START + 4; j++) {
             if (j % 2 == 0 && j > 0) {
                 shortValues[i] = value;  // assuming value stays as a short
                 shifter = 8;
@@ -49,16 +49,24 @@ public class AlgorithmC {
                 if (i > 1) break;
             }
             
-            value |= (message[Packet.PAYLOAD_INDEX_START + j] << shifter);
+            value |= (message[j] << shifter);
             shifter /= 8;
         }
 
         // We read in 4 byte values so actual index is now: Packet.PAYLOAD_INDEX_START + 4
 
+        long floatValue = 0L;
+        shifter = 24;
         // Read in 32 bit float
+        for (; j <= Packet.PAYLOAD_INDEX_START + 8; j++) {
+            floatValue |= message[j] << shifter;
+        }
+
+        // We can do this becuase we know that the data that is coming in is <= 32 bits
+        float actualFloatValue = (float) floatValue;  
 
         // We read in another 4 bytes so actual index is now: Packet.PAYLOAD_INDEX_START + 8
-        
+
         // Read in 5 char array
     }
 }
