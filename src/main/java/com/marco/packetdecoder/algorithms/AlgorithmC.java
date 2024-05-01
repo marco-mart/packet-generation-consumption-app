@@ -14,6 +14,18 @@ public class AlgorithmC {
     private static final int PAYLOAD_LENGTH = 13;
 
     public static void interpretPayload(Packet packet) {
+
+        /**
+         * REMEMBER THAT WE HAVE TO USE AN 'AND' MASK
+         * TO AVOID SIGN EXTENSION PROBLEMS!!
+         * 
+         * EX:
+         * 00000000xxxxxxxx0000000000000000
+         * VS
+         * 111111111111111111111111xxxxxxxx
+         * 
+         * 
+         */
         if (packet.getPayloadLength() != PAYLOAD_LENGTH) {
             System.out.println("Payload length for " + packet + " (TYPE A) is not correct.");
             return;

@@ -1,7 +1,6 @@
 package com.marco.packetdecoder.algorithms;
 
 import com.marco.packetdecoder.packet.Packet;
-import com.marco.packetdecoder.packet.PacketPayloadType;
 import com.marco.packetdecoder.packet.TypeAValues;
 
 public class AlgorithmA {
