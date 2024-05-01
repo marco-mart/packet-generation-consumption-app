@@ -1,6 +1,21 @@
 package com.marco.packetdecoder.packet;
 
 public class Packet {
+
+    /***
+     * Clients:
+     * When payload is acquired using getPayloadValues(),
+     * on the object that is returned, use the method:
+     * getPayloadType(), then compare the result to the 
+     * different values that the packet can be to cast 
+     * it to the correct Class: TypeA, TypeB, or TypeC
+     * @see com.marco.packetdecoder.packet.TypeAValues
+     * @see com.marco.packetdecoder.packet.TypeBValues
+     * @see com.marco.packetdecoder.packet.TypeCValues
+     * 
+     * The type are defined in the PacketPayloadType class:
+     * @see com.marco.packetdecoder.packet.PacketPayloadType
+     */
     
     // LENGTH OF PACKET METADATA (BYTES) BEFORE THE
     // START OF THE ACTUAL PAYLOAD
