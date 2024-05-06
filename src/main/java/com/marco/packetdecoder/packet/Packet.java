@@ -22,7 +22,7 @@ public class Packet {
     public static final int PAYLOAD_INDEX_START = 8;
 
     private int key;
-    private int packetCount;
+    private int packetCount;  // Sequence number
     private int payloadLength;
     private byte[] packetBytes;
     private PacketPayloadType payloadValues;

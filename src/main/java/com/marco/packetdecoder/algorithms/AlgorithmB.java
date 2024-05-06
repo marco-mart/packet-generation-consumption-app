@@ -57,6 +57,12 @@ public class AlgorithmB {
         // 0000 0000   0000 0000   0000 0000   0000 0000
 
 
+        uint32_t crc, tst_crc;
+        tst_crc = args_decode[18];  // Last 4 bytes of packet are used for crc
+        tst_crc = (tst_crc << 8) | (uint32_t) args_decode[19];
+        tst_crc = (tst_crc << 8) | (uint32_t) args_decode[20];
+        tst_crc = (tst_crc << 8) | (uint32_t) args_decode[21];
+
         int data = 0;
         int i = 0;
         int shift = 24;
