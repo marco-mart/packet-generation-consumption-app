@@ -23,6 +23,13 @@ public class AlgorithmA {
             payload[i] = (char) message[Packet.PAYLOAD_INDEX_START + i];
         }
 
+        // Ensure that they are all valid ACSCII values
+        for (int i = 0; i < PAYLOAD_LENGTH; i++) {
+            if (payload[i] < 0 || payload[i] > 127) {
+                return null;
+            }
+        }
+
         TypeAValues values = new TypeAValues(payload);
         return values;
     }
