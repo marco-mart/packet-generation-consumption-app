@@ -1,4 +1,4 @@
 @echo off
 call Scripts\activate.bat
-python ./src/main.py
+python ./py_src/main.py
 call Scripts\deactivate.bat

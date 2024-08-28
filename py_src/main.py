@@ -1,7 +1,4 @@
 from packet_processing import thread_manager
-import typing
-import threading
-from queue import Queue
 
 # Create packet queue
 # Create producer and inject packet queue
