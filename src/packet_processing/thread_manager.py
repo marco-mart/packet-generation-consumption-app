@@ -1,6 +1,6 @@
 from threading import Thread
-from threads import packet_producer
-from threads import packet_consumer
+from packet_processing import packet_producer
+from packet_processing import packet_consumer
 from queue import Queue
 
 def start_threads() -> None:

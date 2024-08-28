@@ -1,4 +1,4 @@
-from threads import thread_manager
+from packet_processing import thread_manager
 import typing
 import threading
 from queue import Queue
